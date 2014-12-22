@@ -1,28 +1,19 @@
 
- //["makeupaddiction", "muacirclejerk"];
-//var formData = new FormData("inputForm");
-//formData.append("reddit1", reddit1);
-
 var subreddits = [];
 var posts = [];
 var statuses;
 
 $("#submitButton").click(function() {
-	
 	subreddits = getSubreddits();
-
-	console.log(subreddits);
 	$("#inputForm").hide();
 	$("#postList").show();
-	loadSubreddits();
+	loadSubreddits(document.getElementById("numPosts").value);
 });
 
-function loadSubreddits() {
-	console.log(subreddits);
+function loadSubreddits(numPosts) {
 	//map iteratorates over each element in the array given (ex. subreddits)
 	statuses = subreddits.map( function(index, subreddit) {
-		console.log(subreddit);
-		var url = "http://www.reddit.com/r/" + subreddit + "/hot.json?limit=5";
+		var url = "http://www.reddit.com/r/" + subreddit + "/hot.json?limit=" + numPosts;
 
 		// requests from URL, returns object from JSON response as data
 		// stores the progress in status
@@ -30,7 +21,6 @@ function loadSubreddits() {
 
 		status.done(function(data) {
 			posts = posts.concat(data.data.children);
-			console.log(posts);
 		});
 
 		return status;
@@ -41,16 +31,12 @@ function loadSubreddits() {
 		posts = posts.sort(function(post1, post2) {
 			return post2.data.score - post1.data.score;
 		});
-		console.log("anything");
 
 		for (var i = 0; i < posts.length; i++) {
 			$("#postList").append(printPosts(posts[i].data));
 		}
 	});
-
 }
-
-
 
 function printPosts(post) {
 	var title = "<h3 class='lead'><a href=\"" + post.url + "\">" + post.title + "</a></h3>";
@@ -61,7 +47,7 @@ function printPosts(post) {
 }
 
 function getSubreddits() {
-	return $('input[type="text"]').map(function(index, input) {
+	return $('input[name="reddit"]').map(function(index, input) {
 		var value = $(input).val();
 		if (value)
 			return value;

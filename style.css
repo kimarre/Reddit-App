@@ -15,6 +15,10 @@ hr {
 	margin-bottom:3px;
 }
 
+#numPosts {
+	width: 60px;
+}
+
 #postList {
 	display:none;
 }

@@ -6,9 +6,19 @@
 
 header {
 	font-size:35px;
+	margin-top:15px;
+	margin-bottom:5px;
 }
 
 hr {
 	margin-top:3px;
 	margin-bottom:3px;
+}
+
+#postList {
+	display:none;
+}
+
+textarea {
+	resize:none;
 }

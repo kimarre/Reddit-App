@@ -11,9 +11,9 @@ $("#submitButton").click(function() {
 });
 
 function loadSubreddits(numPosts) {
-	//map iteratorates over each element in the array given (ex. subreddits)
+	// map iterates over each element in the array given (ex. subreddits)
 	statuses = subreddits.map( function(index, subreddit) {
-		var url = "http://www.reddit.com/r/" + subreddit + "/hot.json?limit=" + numPosts;
+		var url = "https://www.reddit.com/r/" + subreddit + "/hot.json?limit=" + numPosts;
 
 		// requests from URL, returns object from JSON response as data
 		// stores the progress in status
@@ -40,10 +40,10 @@ function loadSubreddits(numPosts) {
 
 function printPosts(post) {
 	var title = "<h3 class='lead'><a href=\"" + post.url + "\">" + post.title + "</a></h3>";
-	var details = "<p>" + post.score + " points by " + post.author + " in " 
+	var details = "<p>" + post.score + " points by " + post.author + " in "
 	 + post.subreddit + "</p>";
 
-	return "<div class = 'postEntry'>" + title + details + "</div>";	
+	return "<div class = 'postEntry'>" + title + details + "</div>";
 }
 
 function getSubreddits() {
@@ -53,9 +53,3 @@ function getSubreddits() {
 			return value;
 	});
 }
-
-// $: JQuery object
-// .: class
-// #: id
-
-//<a href=""> </a>

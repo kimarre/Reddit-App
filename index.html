@@ -2,31 +2,37 @@
 
 <html>
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-	<header class="container">Personalized Reddit App</header>
-	<hr>
+   <h1 class="container">Personalized Reddit App</h1>
+   <hr>
 
-	<div class="container" id="inputForm">
-		<h3>Enter up to five subreddits:</h3><br>
-		<h4>/r/ <input type="text" name="reddit"><br><br>
-			/r/ <input type="text" name="reddit"><br><br>
-			/r/ <input type="text" name="reddit"><br><br>
-			/r/ <input type="text" name="reddit"><br><br>
-			/r/ <input type="text" name="reddit"><br><br>
-			How many posts from each subreddit? <input type="text" id="numPosts">
-		</h4>
-		<button class="btn" id="submitButton" value="Submit">Submit</button>
-	</div>
+   <div class="container" id="inputForm">
+      <h3>Enter up to five subreddits:</h3><br>
 
-	<div class = "container" id="postList" class="container"></div>
+      <form>
+         <label>/r/ <input type="text" name="subreddit1"></label>
+         <label>/r/ <input type="text" name="subreddit2"></label>
+         <label>/r/ <input type="text" name="subreddit3"></label>
+         <label>/r/ <input type="text" name="subreddit4"></label>
+         <label>/r/ <input type="text" name="subreddit5"></label>
 
-	<script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
-	<script src="redditapp.js"></script>
+         <label id="postCountLabel">How many posts from each subreddit?
+            <input type="text" name="numPosts" id="numPostsInput">
+         </label>
+
+         <input type="submit" class="btn" id="submitButton" value="Submit"></input>
+      </form>
+   </div>
+
+   <div id="postList" class="container"></div>
+
+   <script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
+   <script src="redditapp.js"></script>
 
 </body>
 

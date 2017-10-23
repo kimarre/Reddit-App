@@ -1,18 +1,31 @@
-
-var subreddits = [];
 var posts = [];
 var statuses;
 
-$("#submitButton").click(function() {
-	subreddits = getSubreddits();
-	$("#inputForm").hide();
-	$("#postList").show();
-	loadSubreddits(document.getElementById("numPosts").value);
+var subredditForm = document.querySelector("form");
+
+subredditForm.addEventListener("submit", function(formEvent) {
+   formEvent.preventDefault(); // Prevent the page from refreshing on submit
+
+   var inputs = formEvent.target.elements;
+
+   var numPosts = inputs.numPosts.value;
+   var subredditValues = [inputs.subreddit1, inputs.subreddit2, inputs.subreddit3,
+    inputs.subreddit4, inputs.subreddit5];
+
+   subredditValues = subredditValues.map(function(element) {
+      return element.value;
+   });
+
+   subredditValues = subredditValues.filter(function(value) {
+      return value != "";
+   });
+
+   loadSubreddits(subredditValues, numPosts);
 });
 
-function loadSubreddits(numPosts) {
+function loadSubreddits(subreddits, numPosts) {
 	// map iterates over each element in the array given (ex. subreddits)
-	statuses = subreddits.map( function(index, subreddit) {
+	statuses = subreddits.map(function(subreddit) {
 		var url = "https://www.reddit.com/r/" + subreddit + "/hot.json?limit=" + numPosts;
 
 		// requests from URL, returns object from JSON response as data
@@ -35,6 +48,9 @@ function loadSubreddits(numPosts) {
 		for (var i = 0; i < posts.length; i++) {
 			$("#postList").append(printPosts(posts[i].data));
 		}
+
+      $("#inputForm").hide();
+      $("#postList").show();
 	});
 }
 
@@ -44,12 +60,4 @@ function printPosts(post) {
 	 + post.subreddit + "</p>";
 
 	return "<div class = 'postEntry'>" + title + details + "</div>";
-}
-
-function getSubreddits() {
-	return $('input[name="reddit"]').map(function(index, input) {
-		var value = $(input).val();
-		if (value)
-			return value;
-	});
 }

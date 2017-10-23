@@ -4,7 +4,16 @@
 
 }
 
-header {
+label {
+   display: block;
+   margin-bottom: 20px;
+}
+
+#postCountLabel {
+   font-size: 17px;
+}
+
+h1 {
 	font-size:35px;
 	margin-top:15px;
 	margin-bottom:5px;
@@ -15,8 +24,9 @@ hr {
 	margin-bottom:3px;
 }
 
-#numPosts {
+#numPostsInput {
 	width: 60px;
+   margin-left: 20px;
 }
 
 #postList {

@@ -48,7 +48,7 @@ function loadSubreddits(subreddits, numPosts) {
 			return post2.data.score - post1.data.score;
 		});
 
-		for (var i = 0; i < posts.length; i++) {
+		for (var i = 0; i < posts.length && i < numPosts; i++) {
 			postList.appendChild(getPosts(posts[i].data));
 		}
 

@@ -24,6 +24,9 @@ subredditForm.addEventListener("submit", function(formEvent) {
 });
 
 function loadSubreddits(subreddits, numPosts) {
+   var form = document.getElementById("inputForm");
+   var postList = document.getElementById("postList");
+
 	// map iterates over each element in the array given (ex. subreddits)
 	statuses = subreddits.map(function(subreddit) {
 		var url = "https://www.reddit.com/r/" + subreddit + "/hot.json?limit=" + numPosts;
@@ -46,18 +49,48 @@ function loadSubreddits(subreddits, numPosts) {
 		});
 
 		for (var i = 0; i < posts.length; i++) {
-			$("#postList").append(printPosts(posts[i].data));
+			postList.appendChild(getPosts(posts[i].data));
 		}
 
-      $("#inputForm").hide();
-      $("#postList").show();
+      form.style.display = 'none';
+      postList.style.display = 'block';
 	});
 }
 
-function printPosts(post) {
-	var title = "<h3 class='lead'><a href=\"" + post.url + "\">" + post.title + "</a></h3>";
-	var details = "<p>" + post.score + " points by " + post.author + " in "
-	 + post.subreddit + "</p>";
+function getPosts(post) {
+	var title = getTitleElement(post);
+	var details = getDetailsElement(post);
 
-	return "<div class = 'postEntry'>" + title + details + "</div>";
+   var postEntry = document.createElement("div");
+   postEntry.classList.add("postEntry");
+
+   postEntry.appendChild(title);
+   postEntry.appendChild(details);
+
+   return postEntry;
+}
+
+function getTitleElement(post) {
+   var title = document.createElement("h3");
+   title.classList.add("lead");
+
+   var link = document.createElement("a");
+   link.href = post.url;
+
+   var titleText = document.createTextNode(post.title);
+
+   link.appendChild(titleText);
+   title.appendChild(link);
+
+   return title;
+}
+
+function getDetailsElement(post) {
+   var details = document.createElement("p");
+   var detailsText = document.createTextNode(post.score + " points by " +
+    post.author + " in " + post.subreddit);
+
+   details.appendChild(detailsText);
+
+   return details;
 }
